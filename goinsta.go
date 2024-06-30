@@ -486,10 +486,13 @@ func (insta *Instagram) Login(password ...string) (err error) {
 	if err != nil {
 		return
 	}
+	time.Sleep(2*time.Second)
 	err = insta.sync()
 	if err != nil {
 		return
 	}
+	time.Sleep(2*time.Second)
+
 
 	err = insta.getPrefill()
 	if err != nil {
@@ -498,6 +501,7 @@ func (insta *Instagram) Login(password ...string) (err error) {
 		}
 		insta.warnHandler("Non fatal error while fetching prefill:", err)
 	}
+	time.Sleep(2*time.Second)
 
 	err = insta.contactPrefill()
 	if err != nil {
@@ -506,6 +510,7 @@ func (insta *Instagram) Login(password ...string) (err error) {
 		}
 		insta.warnHandler("Non fatal error while fetching contact prefill:", err)
 	}
+	time.Sleep(2*time.Second)
 
 	err = insta.sync()
 	if err != nil {
@@ -514,11 +519,13 @@ func (insta *Instagram) Login(password ...string) (err error) {
 	if insta.pubKey == "" || insta.pubKeyID == -1 {
 		return errors.New("Sync returned empty public key and/or public key id")
 	}
+	time.Sleep(2*time.Second)
 
 	err = insta.login()
 	if err != nil {
 		return err
 	}
+	time.Sleep(2*time.Second)
 
 	// post-login sequence
 	err = insta.OpenApp()
